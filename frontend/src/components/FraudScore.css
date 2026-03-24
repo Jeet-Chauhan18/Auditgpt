@@ -1,0 +1,142 @@
+.fraud-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.component-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.score-ring-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.score-ring {
+  width: 100%;
+  height: 100%;
+}
+
+.score-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.score-value {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.score-max {
+  font-size: 16px;
+  color: var(--text-muted);
+}
+
+.risk-badge {
+  font-size: 13px;
+  padding: 4px 16px;
+}
+
+.score-breakdown {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  gap: 8px;
+}
+
+.breakdown-label {
+  font-size: 12px;
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+.breakdown-value {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.breakdown-flag {
+  font-size: 9px;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 3px;
+  letter-spacing: 0.5px;
+}
+
+.flag-ok {
+  color: var(--green);
+  background: rgba(0, 255, 136, 0.1);
+}
+
+.flag-warn {
+  color: var(--red);
+  background: rgba(255, 68, 68, 0.1);
+}
+
+.flag-caution {
+  color: var(--amber);
+  background: rgba(255, 165, 0, 0.1);
+}
+
+.breakdown-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 0;
+}
+
+.breakdown-weights {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.weight-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.weight-row span:first-child {
+  width: 100px;
+  flex-shrink: 0;
+}
+
+.weight-bar {
+  flex: 1;
+  height: 4px;
+  background: var(--bg-primary);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.weight-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 1s ease-out;
+}
+
+.weight-row .mono {
+  width: 24px;
+  text-align: right;
+  font-size: 11px;
+}

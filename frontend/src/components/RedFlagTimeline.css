@@ -1,0 +1,83 @@
+.red-flag-timeline.empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 24px;
+}
+
+.red-flag-timeline.empty p {
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+.timeline {
+  margin-top: 16px;
+  padding-left: 20px;
+  border-left: 2px solid var(--border);
+}
+
+.timeline-year {
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.year-marker {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.year-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  margin-left: -25px;
+  border: 2px solid var(--bg-primary);
+}
+
+.year-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.year-flags {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 4px;
+}
+
+.flag-card {
+  background: var(--bg-secondary);
+  border-left: 3px solid;
+  border-radius: 4px;
+  padding: 10px 14px;
+}
+
+.flag-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.flag-type {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.flag-context {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.flag-evolution {
+  font-size: 11px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}

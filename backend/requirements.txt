@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+pandas
+numpy
+scipy
+vaderSentiment
+google-generativeai
+requests
+beautifulsoup4
+pydantic
+python-dotenv
