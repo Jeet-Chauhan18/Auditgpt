@@ -555,7 +555,7 @@ export default function Home() {
           <button className="nav-page-link" onClick={() => navigate('/critical')}>
             Critical Section
           </button>
-          <button className="nav-page-link nav-satyam" onClick={() => navigate('/satyam')}>
+          <button className="nav-page-link nav-satyam" onClick={() => navigate('/cases')}>
             Real Cases
           </button>
 
