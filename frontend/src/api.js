@@ -1,3 +1,14 @@
-export const API = import.meta.env.DEV
-  ? "http://localhost:8000/api"
-  : "/api";
+const API_BASE = "/api";
+
+export const API = {
+  getSectors: () => fetch(`${API_BASE}/sectors`).then(res => res.json()),
+  
+  searchCompanies: (q) =>
+    fetch(`${API_BASE}/search?q=${encodeURIComponent(q)}`).then(res => res.json()),
+
+  getReport: (id) =>
+    fetch(`${API_BASE}/report/${id}`).then(res => res.json()),
+
+  getSectorCompanies: (sector) =>
+    fetch(`${API_BASE}/sectors/${encodeURIComponent(sector)}`).then(res => res.json()),
+};

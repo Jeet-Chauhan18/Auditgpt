@@ -169,7 +169,13 @@ from functools import lru_cache
 from fastapi import APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
-from backend.llm.client import generate_narrative_stream
+# from backend.llm.client import generate_narrative_stream
+
+try:
+    from backend.llm.client import generate_narrative_stream
+except Exception as e:
+    print("LLM IMPORT ERROR:", e)
+    generate_narrative_stream = None
 
 router = APIRouter()
 
@@ -196,18 +202,37 @@ def _get_all_reports() -> dict[str, dict]:
     return _reports_cache()
 
 
+# @lru_cache(maxsize=1)
+# def _reports_cache() -> dict[str, dict]:
+#     reports = {}
+#     if not os.path.exists(REPORTS_DIR):
+#         return reports
+#     for fname in os.listdir(REPORTS_DIR):
+#         if fname.endswith(".json"):
+#             data = _load_json(os.path.join(REPORTS_DIR, fname))
+#             if data and "company_id" in data:
+#                 reports[data["company_id"]] = data
+#     return reports
 @lru_cache(maxsize=1)
 def _reports_cache() -> dict[str, dict]:
     reports = {}
+
     if not os.path.exists(REPORTS_DIR):
         return reports
-    for fname in os.listdir(REPORTS_DIR):
+
+    files = os.listdir(REPORTS_DIR)
+
+    # ✅ ADD THIS LINE HERE
+    if len(files) > 200:
+        raise Exception("Too many files for Vercel serverless")
+
+    for fname in files:
         if fname.endswith(".json"):
             data = _load_json(os.path.join(REPORTS_DIR, fname))
             if data and "company_id" in data:
                 reports[data["company_id"]] = data
-    return reports
 
+    return reports
 
 def _find_report(company_id: str) -> dict | None:
     """Case-insensitive report lookup."""
@@ -408,28 +433,43 @@ def get_report(company_id: str):
     return _build_full_report(report, resolved_id)
 
 
+# @router.get("/stream/{company_id}")
+# def stream_narrative(company_id: str):
+#     """SSE stream of LLM narrative for a company."""
+#     report = _find_report(company_id)
+
+#     if report is None:
+#         raise HTTPException(status_code=404, detail="Company not found")
+
+#     # Stream cached narrative character-by-character for live feel
+#     cached_narrative = report.get("narrative")
+#     if cached_narrative:
+#         def stream_cached():
+#             chunk_size = 40
+#             for i in range(0, len(cached_narrative), chunk_size):
+#                 yield f"data: {json.dumps(cached_narrative[i:i + chunk_size])}\n\n"
+#             yield "data: [DONE]\n\n"
+
+#         return StreamingResponse(
+#             stream_cached(),
+#             media_type="text/event-stream",
+#             headers={"Cache-Control": "no-cache", "Connection": "keep-alive"},
+#         )
+
+# @router.get("/stream/{company_id}")
+# def stream_narrative(company_id: str):
+#     report = _find_report(company_id)
+
+#     if report is None:
+#         raise HTTPException(status_code=404, detail="Company not found")
+
+#     return {
+#         "narrative": report.get("narrative", "No narrative available")
+#     }
+
 @router.get("/stream/{company_id}")
 def stream_narrative(company_id: str):
-    """SSE stream of LLM narrative for a company."""
-    report = _find_report(company_id)
-
-    if report is None:
-        raise HTTPException(status_code=404, detail="Company not found")
-
-    # Stream cached narrative character-by-character for live feel
-    cached_narrative = report.get("narrative")
-    if cached_narrative:
-        def stream_cached():
-            chunk_size = 40
-            for i in range(0, len(cached_narrative), chunk_size):
-                yield f"data: {json.dumps(cached_narrative[i:i + chunk_size])}\n\n"
-            yield "data: [DONE]\n\n"
-
-        return StreamingResponse(
-            stream_cached(),
-            media_type="text/event-stream",
-            headers={"Cache-Control": "no-cache", "Connection": "keep-alive"},
-        )
+    return {"message": "Streaming disabled on Vercel"}
 
     # Live generation
     company_id_resolved = report["company_id"]
@@ -456,3 +496,7 @@ def stream_narrative(company_id: str):
         media_type="text/event-stream",
         headers={"Cache-Control": "no-cache", "Connection": "keep-alive"},
     )
+
+    @router.get("/test")
+def test():
+    return {"message": "backend working"}
