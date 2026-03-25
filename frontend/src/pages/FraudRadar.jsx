@@ -1,7 +1,8 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 
-const API = "http://localhost:8000/api";
+// const API = "http://localhost:8000/api";
+const API = import.meta.env.VITE_API_URL || "http://localhost:8000/api";
 
 // ── helpers ────────────────────────────────────────────────────────────────
 const riskMeta = (score) => {
