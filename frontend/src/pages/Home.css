@@ -659,3 +659,268 @@ body::before {
   width: 100%; height: 1px;
   background: linear-gradient(90deg, transparent, var(--border), transparent);
 }
+
+
+/* HEHEHEHA */
+/* ─────────────────────────────────────────────────────────────────────────
+   Home.css PATCH — paste these rules into your existing Home.css
+   (they will override the conflicting ones)
+   ───────────────────────────────────────────────────────────────────────── */
+
+/* ── Nav link buttons (reset <button> to look like the old <a> links) ─── */
+.nav-link {
+  all: unset;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--text-2, #8892a4);
+  transition: color 0.15s ease;
+}
+.nav-link:hover {
+  color: var(--text-1, #d0dce8);
+}
+
+/* ── Demo strip: full-width dark band ───────────────────────────────────── */
+.demo-strip {
+  width: 100%;
+  background: #06090f;
+  border-top: 1px solid #111c28;
+  border-bottom: 1px solid #111c28;
+  padding: 48px 0;
+}
+
+/* Center the inner content, max-width, two equal columns */
+.demo-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 40px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* Left column */
+.demo-score-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* Right column */
+.demo-heatmap-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.demo-heatmap-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: #3a4a60;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* ── Mini heatmap grid ──────────────────────────────────────────────────── */
+.mini-heatmap {
+  display: grid;
+  /* label col + 5 data cols */
+  grid-template-columns: 110px repeat(5, 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+.mh-corner {
+  /* empty top-left cell */
+}
+
+.mh-col {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #2a3848;
+  text-align: center;
+  font-weight: 600;
+  padding-bottom: 4px;
+  letter-spacing: 0.05em;
+}
+
+.mh-row-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  color: #3a4a60;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  padding-right: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mh-cell {
+  height: 32px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  transition: transform 0.15s ease;
+  cursor: default;
+}
+.mh-cell:hover {
+  transform: scale(1.1);
+  z-index: 2;
+  position: relative;
+}
+
+/* heat levels — 0=normal → 4=critical */
+.mh-0 { background: #0b1018; color: #253040; }
+.mh-1 { background: #261508; color: #c07830; }
+.mh-2 { background: #361b08; color: #e09040; }
+.mh-3 { background: #601810; color: #ff8833; }
+.mh-4 { background: #801020; color: #ff3344; box-shadow: 0 0 6px rgba(255,51,68,0.35); }
+
+/* ── Responsive: stack on narrow screens ────────────────────────────────── */
+@media (max-width: 860px) {
+  .demo-inner {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .mini-heatmap {
+    grid-template-columns: 90px repeat(5, 1fr);
+  }
+}
+
+/* HEHEHEHA-2 */
+
+/* ── NAV OVERRIDES — paste at bottom of Home.css ── */
+
+.home-nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 36px;
+  background: rgba(7, 11, 18, 0.96);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid #0d1622;
+  gap: 0;
+}
+
+.nav-logo {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  color: #d0dce8;
+  white-space: nowrap;
+  margin-right: 32px;
+  flex-shrink: 0;
+}
+.nav-logo em {
+  font-style: normal;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #2a3850;
+  margin-left: 4px;
+}
+
+/* divider between logo and links */
+.nav-divider {
+  width: 1px;
+  height: 20px;
+  background: #1a2535;
+  margin-right: 28px;
+  flex-shrink: 0;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex: 1;
+}
+
+/* ── every nav item is a button — resets all browser defaults ── */
+.nav-link,
+.nav-page-link {
+  all: unset;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 6px 12px;
+  border-radius: 3px;
+  transition: color 0.15s ease, background 0.15s ease;
+  white-space: nowrap;
+}
+
+/* anchor links (same-page sections) */
+.nav-link {
+  color: #3a4a60;
+}
+.nav-link:hover {
+  color: #7a8a9a;
+  background: rgba(255,255,255,0.03);
+}
+
+/* page route links */
+.nav-page-link {
+  color: #5a7090;
+}
+.nav-page-link:hover {
+  color: #c0d0e0;
+  background: rgba(255,255,255,0.04);
+}
+
+/* separator dot between groups */
+.nav-sep {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #1a2535;
+  margin: 0 8px;
+  flex-shrink: 0;
+}
+
+/* CTA button */
+.nav-cta {
+  margin-left: auto;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  padding: 7px 18px;
+  border-radius: 3px;
+  background: #00ff88;
+  color: #070b12;
+  cursor: pointer;
+  border: none;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.nav-cta:hover {
+  background: #00dd77;
+  box-shadow: 0 0 16px rgba(0, 255, 136, 0.35);
+}
+
+/* Satyam link gets a red tint — it's the danger page */
+.nav-satyam {
+  color: #6a3040 !important;
+}
+.nav-satyam:hover {
+  color: #ff4455 !important;
+  background: rgba(255, 68, 85, 0.06) !important;
+}
+
+@media (max-width: 900px) {
+  .nav-link, .nav-page-link { padding: 6px 8px; font-size: 9px; }
+  .home-nav { padding: 0 20px; }
+}
