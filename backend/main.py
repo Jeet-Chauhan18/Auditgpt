@@ -29,7 +29,19 @@ app.add_middleware(
 @app.get("/health")
 def health():
     return {"status": "ok"}
-
+@app.get("/debug/routes-file")
+def debug_routes_file():
+    routes_path = os.path.join(os.path.dirname(__file__), "api", "routes.py")
+    try:
+        with open(routes_path) as f:
+            lines = f.readlines()
+        return {
+            "total_lines": len(lines),
+            "last_20_lines": "".join(lines[-20:]),
+            "around_500": "".join(lines[488:510]) if len(lines) > 490 else "file shorter than 490 lines",
+        }
+    except Exception as e:
+        return {"error": str(e)}
 
 try:
     from backend.api.routes import router
