@@ -498,5 +498,3 @@ def stream_narrative(company_id: str):
     )
 
     @router.get("/test")
-def test():
-    return {"message": "backend working"}
