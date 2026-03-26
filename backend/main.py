@@ -45,7 +45,8 @@ def debug_routes_file():
 
 try:
     from backend.api.routes import router
-    app.include_router(router)
+    # app.include_router(router)
+    app.include_router(router, prefix="/api")
 except Exception as e:
     print(f"[ERROR] Failed to load API routes: {e}")
 
