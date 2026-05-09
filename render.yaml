@@ -1,13 +1,10 @@
-# Render.com Blueprint
-# Deploy: render blueprint apply
-
 services:
   - type: web
     name: auditgpt-backend
     env: python
     region: singapore
     plan: free
-    buildCommand: pip install -r requirements.txt
+    buildCommand: pip install -r backend/requirements.txt
     startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
